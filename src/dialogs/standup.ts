@@ -1,6 +1,7 @@
 import {
   IDialogWaterfallStep,
   IPromptConfirmResult,
+  IPromptTextResult,
   Prompts,
 } from 'botbuilder';
 import * as emoji from 'node-emoji';
@@ -18,8 +19,22 @@ const steps: IDialogWaterfallStep[] = [
         `${emoji.get('disappointed')}
         Bummer. If you change your mind before standup time, just message me **standup**`,
       );
+    } else {
+      session.dialogData.standupResponse = {};
+      Prompts.text(session, 'What did you accomplish yesterday?');
     }
-    session.endDialog(`Aww yiss. You said ${util.inspect(result)}`);
+  },
+  (session, result: IPromptTextResult) => {
+    session.dialogData.standupResponse.yesterday = result.response;
+    Prompts.text(session, 'What are you going to accomplish today?');
+  },
+  (session, result: IPromptTextResult) => {
+    session.dialogData.standupResponse.today = result.response;
+    Prompts.text(session, 'Are you blocked in any way?');
+  },
+  (session, result: IPromptTextResult) => {
+    session.dialogData.standupResponse.blockers = result.response;
+    session.endDialog(`${emoji.get('+1')} Thanks for responding! Carpe diem!`);
   },
 ];
 
