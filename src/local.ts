@@ -38,7 +38,7 @@ bot.dialog('/', [
     if (chosenDialog === undefined) {
       // No known menu choice was given
       session.endDialog(
-        `Sorry, I didn't understand that command. Valid options are: **${mainMenuChoicesString}**`,
+        `Sorry, I didn't understand that command. Valid options are: **${mainMenuChoicesString}**`
       );
     } else {
       session.beginDialog(chosenDialog.DIALOG_NAME);

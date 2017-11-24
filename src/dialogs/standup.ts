@@ -19,7 +19,7 @@ const standup: IBotDialogRegistration = {
       if (!result.response) {
         session.endDialog(
           `${emoji.get('disappointed')}
-          Bummer. If you change your mind before standup time, just message me **standup**`,
+          Bummer. If you change your mind before standup time, just message me **standup**`
         );
       } else {
         session.dialogData.standupResponse = {};
@@ -36,7 +36,9 @@ const standup: IBotDialogRegistration = {
     },
     (session, result: IPromptTextResult) => {
       session.dialogData.standupResponse.blockers = result.response;
-      session.endDialog(`${emoji.get('+1')} Thanks for responding! Carpe diem!`);
+      session.endDialog(
+        `${emoji.get('+1')} Thanks for responding! Carpe diem!`
+      );
     },
   ],
 };
