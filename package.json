@@ -31,10 +31,14 @@
   },
   "dependencies": {
     "botbuilder": "^3.12.0",
+    "dynogels": "^9.0.0",
+    "joi": "^13.0.2",
     "node-emoji": "^1.8.1"
   },
   "devDependencies": {
+    "@types/dynogels": "^8.0.0",
     "@types/jest": "^20.0.5",
+    "@types/joi": "^13.0.0",
     "@types/node": "^8.0.0",
     "@types/node-emoji": "^1.4.0",
     "@types/restify": "^5.0.6",
@@ -48,7 +52,7 @@
     "ts-node": "^3.2.0",
     "tslint": "^5.0.0",
     "tslint-config-airbnb": "^5.4.2",
-    "tslint-config-prettier": "^1.1.0",
+    "tslint-config-prettier": "^1.6.0",
     "typescript": "^2.3.0"
   },
   "engines": {
