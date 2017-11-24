@@ -1,7 +1,8 @@
 import * as botbuilder from 'botbuilder';
 import * as restify from 'restify';
 import * as util from 'util';
-import * as standup from './dialogs/standup';
+import standup from './dialogs/standup';
+import { IBotDialogRegistration } from './types';
 
 // Setup Restify Server
 const server = restify.createServer();
@@ -24,9 +25,8 @@ const memoryStorage = new botbuilder.MemoryBotStorage();
 bot.set('storage', memoryStorage);
 
 // All main dialog options are specified here
-const mainMenuChoices: { [index: string]: string } = {
-  standup: standup.DIALOG_NAME,
-  another: 'notreal',
+const mainMenuChoices: { [index: string]: IBotDialogRegistration } = {
+  standup,
 };
 const mainMenuChoicesString = Object.keys(mainMenuChoices).join('**, **'); // Don't bold the commas
 
@@ -34,14 +34,14 @@ const mainMenuChoicesString = Object.keys(mainMenuChoices).join('**, **'); // Do
 bot.dialog('/', [
   (session: botbuilder.Session) => {
     const simplifiedMessage = (session.message.text || '').toLowerCase().trim();
-    const chosenDialogName = mainMenuChoices[simplifiedMessage];
-    if (chosenDialogName === undefined) {
+    const chosenDialog = mainMenuChoices[simplifiedMessage];
+    if (chosenDialog === undefined) {
       // No known menu choice was given
       session.endDialog(
         `Sorry, I didn't understand that command. Valid options are: **${mainMenuChoicesString}**`,
       );
     } else {
-      session.beginDialog(chosenDialogName);
+      session.beginDialog(chosenDialog.DIALOG_NAME);
     }
   },
 ]);
