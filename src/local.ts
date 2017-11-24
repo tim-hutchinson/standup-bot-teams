@@ -18,24 +18,33 @@ const connector = new botbuilder.ChatConnector({
 // Listen for messages from users
 server.post('/api/messages', connector.listen());
 
-// Receive messages from the user and respond by echoing each message back
-const bot = new botbuilder.UniversalBot(
-  connector,
-  (session: botbuilder.Session) => {
-    console.log(util.inspect(session));
-    session.send('You said: %s', session.message.text);
-    switch ((session.message.text || '').toLowerCase()) {
-      case 'standup':
-        session.beginDialog(standup.DIALOG_NAME);
-        break;
-
-      default:
-        break;
-    }
-  },
-);
-
+// Create the bot
+const bot = new botbuilder.UniversalBot(connector);
 const memoryStorage = new botbuilder.MemoryBotStorage();
 bot.set('storage', memoryStorage);
 
+// All main dialog options are specified here
+const mainMenuChoices: { [index: string]: string } = {
+  standup: standup.DIALOG_NAME,
+  another: 'notreal',
+};
+const mainMenuChoicesString = Object.keys(mainMenuChoices).join('**, **'); // Don't bold the commas
+
+// Root dialog for conversation menu
+bot.dialog('/', [
+  (session: botbuilder.Session) => {
+    const simplifiedMessage = (session.message.text || '').toLowerCase().trim();
+    const chosenDialogName = mainMenuChoices[simplifiedMessage];
+    if (chosenDialogName === undefined) {
+      // No known menu choice was given
+      session.endDialog(
+        `Sorry, I didn't understand that command. Valid options are: **${mainMenuChoicesString}**`,
+      );
+    } else {
+      session.beginDialog(chosenDialogName);
+    }
+  },
+]);
+
+// Register all dialogs
 bot.dialog(standup.DIALOG_NAME, standup.steps);
