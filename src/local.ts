@@ -44,7 +44,13 @@ bot.dialog('/', [
       session.beginDialog(chosenDialog.DIALOG_NAME);
     }
   },
-]);
+])
+ // Global 'cancel' registration to abort any command.
+ // Resumes where the user was if they don't confirm.
+.cancelAction('CancelAddNumber', 'Operation cancelled', {
+  matches: /^cancel$/,
+  confirmPrompt: 'Are you sure you wish to cancel?',
+});
 
 // Register all dialogs
 bot.dialog(standup.DIALOG_NAME, standup.steps);
