@@ -10,6 +10,7 @@ const StandupConfiguration = dynogels.define('StandupConfiguration', {
     configID: dynogels.types.uuid(),
     teamID: Joi.string(),
     createdBy: Joi.string(),
+    name: Joi.string(),
     reportChannel: Joi.string(),
     reportTime: Joi.string(), // Time of day only
     members: dynogels.types.stringSet(),

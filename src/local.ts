@@ -2,9 +2,8 @@ import * as botbuilder from 'botbuilder';
 import * as dynogels from 'dynogels';
 import * as restify from 'restify';
 import * as util from 'util';
-import { dialogs, registerAllDialogs} from './dialogs';
+import { dialogs, registerAllDialogs } from './dialogs';
 import { IBotDialogRegistration } from './types';
-
 
 // Setup Restify Server
 const server = restify.createServer();

@@ -25,7 +25,7 @@ if (process.env.AWS_DYNAMODB_ENDPOINT) {
   dynogels.dynamoDriver(new AWS.DynamoDB(opts));
 }
 
-dynogels.createTables((err) => {
+dynogels.createTables(err => {
   // console.log (a);
   console.log(err);
   if (err) {
@@ -33,7 +33,7 @@ dynogels.createTables((err) => {
   } else {
     console.log('Tables have been created');
     console.log(util.inspect(dynogels.models));
-    models.forEach((model) => {
+    models.forEach(model => {
       console.log(`Created model ${model.name} as:`);
       model.describeTable((describeError, data) => {
         console.log(util.inspect(data, { depth: 4 }));

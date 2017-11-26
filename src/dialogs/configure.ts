@@ -9,8 +9,8 @@ import {
 import * as emoji from 'node-emoji';
 import * as util from 'util';
 import { IBotDialogRegistration } from '../types';
-import configureNew from './configureNew';
 import configureEdit from './configureEdit';
+import configureNew from './configureNew';
 
 const configureChoices: { [index: string]: IBotDialogRegistration } = {
   'Create a new standup': configureNew,
