@@ -35,8 +35,9 @@ const configureNew: IBotDialogRegistration = {
       const newConfig = {
         createdBy: session.message.user.id,
         members: session.conversationData.members,
-        reportChannel: session.conversationData.channel,
-        reportTime: `${reportTime.hour}:${reportTime.min}`,
+        name: session.conversationData.name,
+        reportChannel: session.conversationData.reportChannel,
+        reportTime: reportTime.string,
         teamID: 'TODOFIXME', // TODO: Get this from botbuilkder-teams
       };
       StandupConfiguration.create(newConfig, (err, data) => {

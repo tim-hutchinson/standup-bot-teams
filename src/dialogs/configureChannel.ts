@@ -1,4 +1,4 @@
-import {  IPromptTextResult, Prompts } from 'botbuilder';
+import { IPromptTextResult, Prompts } from 'botbuilder';
 import { IBotDialogRegistration } from '../types';
 
 const configureChannel: IBotDialogRegistration = {
@@ -15,7 +15,7 @@ const configureChannel: IBotDialogRegistration = {
     (session, result: IPromptTextResult) => {
       if (result.response) {
         // TODO: Channel verification. Ensure ID not name.
-        session.conversationData.channel = result.response;
+        session.conversationData.reportChannel = result.response;
         session.endDialog();
       }
     },

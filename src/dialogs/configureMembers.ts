@@ -24,8 +24,7 @@ const configureMembers: IBotDialogRegistration = {
       const isDone = doneRegex.test(result.response || '');
       if (isDone) {
         session.endDialog();
-      }
-      else {
+      } else {
         session.conversationData.members.push(result.response);
         session.replaceDialog(configureMembers.DIALOG_NAME, { reprompt: true });
       }

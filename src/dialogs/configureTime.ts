@@ -20,7 +20,8 @@ const configureTime: IBotDialogRegistration = {
           hour: parsedDateTime.getUTCHours(),
           min: roundedMins,
         };
-        session.conversationData.reportTime = reportTime;
+        session.conversationData._rawReportTime = reportTime;
+        session.conversationData.reportTime = `${reportTime.hour}:${reportTime.min}`;
         // TODO: Response with a user-local response of the report time
         session.endDialog();
       }
