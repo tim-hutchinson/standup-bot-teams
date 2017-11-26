@@ -12,7 +12,7 @@ const StandupResponse = dynogels.define('StandupResponse', {
     standupConfigID: dynogels.types.uuid(),
     responseDate: Joi.date(),
     didRespond: Joi.boolean(),
-    responses: {
+    answers: {
       didYesterday: Joi.string(),
       doToday: Joi.string(),
       blockers: Joi.string(),
@@ -33,12 +33,14 @@ export interface IStandupResponse {
   teamID: string;
   standupConfigID: string;
   responseDate: Date;
-  didRespond: boolean,
-  responses: {
-    didYesterday?: string;
-    doToday?: string;
-    blockers?: string;
-  };
+  didRespond: boolean;
+  answers: IStandupAnswers;
+}
+
+export interface IStandupAnswers {
+  didYesterday?: string;
+  doToday?: string;
+  blockers?: string;
 }
 
 export default StandupResponse;
