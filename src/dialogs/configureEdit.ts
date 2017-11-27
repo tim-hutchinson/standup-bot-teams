@@ -7,6 +7,7 @@ import {
 import StandupConfiguration from '../models/StandupConfiguration';
 import { DialogModes, IBotDialogRegistration, } from '../types';
 import configureChannel from './configureChannel';
+import configureDelete from './configureDelete';
 import configureMembers from './configureMembers';
 import configureName from './configureName';
 import configureTime from './configureTime';
@@ -18,6 +19,7 @@ const configureChoices = {
   'Channel': { dialog: configureChannel, property: 'reportChannel' },
   'Time': { dialog: configureTime, property: 'reportTime' },
   'Members': { dialog: configureMembers, property: 'members' },
+  'Delete': { dialog: configureDelete, property: undefined },
   'Finish Editing': undefined,
 };
 /* tslint:enable */

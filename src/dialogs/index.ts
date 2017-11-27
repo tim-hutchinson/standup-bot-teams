@@ -2,6 +2,7 @@ import { UniversalBot } from 'botbuilder';
 import { IBotDialogRegistration } from '../types';
 import configure from './configure';
 import configureChannel from './configureChannel';
+import configureDelete from './configureDelete';
 import configureEdit from './configureEdit';
 import configureMembers from './configureMembers';
 import configureName from './configureName';
@@ -12,6 +13,7 @@ import standup from './standup';
 const dialogs: { [index: string]: IBotDialogRegistration } = {
   configure,
   configureChannel,
+  configureDelete,
   configureEdit,
   configureMembers,
   configureName,
