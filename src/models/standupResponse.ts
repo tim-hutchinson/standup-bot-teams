@@ -10,7 +10,7 @@ const StandupResponse = dynogels.define('StandupResponse', {
     userID: Joi.string(),
     teamID: Joi.string(),
     standupConfigID: dynogels.types.uuid(),
-    responseDate: Joi.date(),
+    responseDate: Joi.string(),
     didRespond: Joi.boolean(),
     answers: {
       didYesterday: Joi.string(),
@@ -27,6 +27,10 @@ const StandupResponse = dynogels.define('StandupResponse', {
     },
   ],
 });
+
+export function responseDateString(date = new Date()) {
+  return `${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate()}`; // tslint:disable-line max-line-length
+}
 
 export interface IStandupResponse {
   userID: string;
